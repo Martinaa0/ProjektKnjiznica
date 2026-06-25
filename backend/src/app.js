@@ -1,18 +1,12 @@
 const express = require('express')
 const cors = require('cors')
-const helmet = require('helmet')
-const morgan = require('morgan')
-require('dotenv').config()
 
 console.log('app.js ucitan') // da vidim jel se ucitava
 
 const app = express()
 
-app.use(helmet())
 app.use(cors())
-app.use(morgan('combined'))
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 app.use('/api', require('./routes'))
 
@@ -31,8 +25,7 @@ app.use((err, req, res, next) => {
 
 app.use((req, res) => {
     res.status(404).json({
-        error: 'Ruta nije pronadena',
-        path: req.path
+        error: 'Ruta nije pronadena'
     })
 })
 
